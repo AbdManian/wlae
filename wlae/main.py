@@ -45,7 +45,6 @@ def write_files(all_instructions, code_file, header_file, lst_file):
     _list_to_file(lst_file, lst_content)
 
 
-
 def main():
     args = get_user_args()
     all_instructions = []
@@ -57,8 +56,8 @@ def main():
             id=_get_id_from_file_name(f),
             inst=instructions
         ))
-    write_files(all_instructions, 'out.hex', 'out.h', 'out.lst')
-    # print(all_instructions)
-    #     # print(f'Processing {f} ID={_get_id_from_file_name(f)}')
-    #     # print(proto_matrix)
-    # print(args)
+
+    out_file = pathlib.Path(args.out)
+    header_file = out_file.with_suffix('.h')
+    lst_file = out_file.with_suffix('.lst')
+    write_files(all_instructions, out_file, header_file, lst_file)

@@ -8,10 +8,10 @@ def get_user_args(given_args=None):
     )
 
     parser.add_argument(
-        '--output',
+        '--out',
         type=str,
-        help='Output file name default="out"',
-        default='out',
+        help='Encoded hex file default="out.txt"',
+        default='out.txt',
         metavar='FILENAME'
     )
 
