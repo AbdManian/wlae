@@ -88,6 +88,12 @@ def assemble_instructions(proto_matrix: np.array, min_pipe_stages: int = 8):
 
         p1_shift = parity[r, 0]
 
+        req_stages = min_pipe_stages - len(current_row_instr)
+        for _ in range(req_stages):
+            nop = Instruction()
+            nop.row_info = r
+            current_row_instr.append(nop)
+        
         if r == 0:
             i1 = Instruction()
             i1.row_info = r
@@ -98,12 +104,6 @@ def assemble_instructions(proto_matrix: np.array, min_pipe_stages: int = 8):
             i1.result_store = True
             current_row_instr.append(i1)
         else:
-            req_stages = min_pipe_stages - len(current_row_instr)
-            for _ in range(req_stages):
-                nop = Instruction()
-                nop.row_info = r
-                current_row_instr.append(nop)
-
             if p1_shift == 0:
                 i2 = Instruction()
                 i2.row_info = r
